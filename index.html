@@ -5,38 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador Solar Profesional | BAJA PRO-SERVICES</title>
     <style>
+        /* PALETA DE COLORES PROFESIONAL AJUSTADA A LA IMAGEN */
         :root {
-            --primary-blue: #1a2e41; 
-            --accent-orange: #ff7f00; 
+            --primary-blue: #1a2e41; /* Azul marino profundo del texto "DIMA" */
+            --accent-orange: #ff7f00; /* Naranja vibrante del logo esférico */
+            --bg-light: #f4f7f6;
             --text-dark: #2c3e50;
             --success-green: #27ae60;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f0f4f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
             margin: 0;
             padding: 0;
             color: var(--text-dark);
         }
 
+        /* Estilos para el Hero Image */
         .hero-container {
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            line-height: 0;
+            line-height: 0; /* Elimina espacio extra debajo de la imagen */
+            position: relative;
         }
 
         .hero-image {
             width: 100%;
             height: auto;
-            border-bottom: 3px solid var(--primary-blue);
+            /* Borde inferior profesional en azul marino */
+            border-bottom: 4px solid var(--primary-blue);
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
         .container {
             max-width: 600px;
-            margin: -30px auto 50px;
+            margin: -30px auto 50px; /* Sube un poco para un efecto overlay moderno */
             background: white;
             padding: 35px;
             border-radius: 16px;
@@ -45,30 +50,65 @@
             z-index: 10;
         }
 
-        header { text-align: center; margin-bottom: 30px; }
-        header h1 { color: var(--primary-blue); margin: 0; font-size: 26px; }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        header h1 { 
+            margin: 0; 
+            color: var(--primary-blue); /* Texto en azul marino */
+            font-size: 28px; 
+            font-weight: 800; 
+            letter-spacing: -0.5px;
+        }
+        header p { 
+            margin: 8px 0 0; 
+            font-size: 13px; 
+            color: #7f8c8d; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            font-weight: 600;
+        }
 
         .section-title {
             font-weight: 700;
             margin: 25px 0 12px;
             display: block;
-            border-left: 4px solid var(--accent-orange);
+            border-left: 4px solid var(--accent-orange); /* Acento en naranja */
             padding-left: 12px;
             color: var(--primary-blue);
+            font-size: 16px;
             text-transform: uppercase;
-            font-size: 14px;
+            letter-spacing: 0.5px;
         }
 
-        label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 600; color: var(--primary-blue); }
-        
+        label { 
+            display: block; 
+            margin-bottom: 6px; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: var(--primary-blue);
+        }
+
         input, select {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 14px;
+            margin-bottom: 18px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 15px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            color: var(--text-dark);
+        }
+
+        input:focus, select:focus { 
+            border-color: var(--primary-blue); 
+            outline: none; 
+            box-shadow: 0 0 0 3px rgba(26, 46, 65, 0.1);
         }
 
         /* Grid para meses/bimestres */
@@ -85,169 +125,290 @@
         .result-box {
             background: var(--primary-blue);
             color: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px;
             text-align: center;
+            margin-top: 25px;
             border-bottom: 6px solid var(--accent-orange);
+            box-shadow: 0 6px 15px rgba(26, 46, 65, 0.2);
         }
 
-        .result-value { font-size: 32px; font-weight: 800; color: var(--accent-orange); }
+        .result-box-label {
+            font-size: 15px; 
+            opacity: 0.85; 
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--accent-orange);
+            margin: 10px 0;
+            letter-spacing: -1px;
+        }
+
+        .result-panels {
+            margin-top: 12px; 
+            font-size: 16px; 
+            font-weight: 500;
+            background: rgba(255,255,255,0.1);
+            padding: 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
 
         button {
             width: 100%;
             background-color: var(--success-green);
             color: white;
-            padding: 18px;
+            padding: 20px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 20px;
+            transition: all 0.3s;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
         }
 
-        .hidden { display: none; }
+        button:hover { 
+            background-color: #219150; 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+        }
 
-        @media (max-width: 500px) {
-            .inputs-grid { grid-template-columns: 1fr; }
+        .footer-info {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 30px;
+            color: #95a5a6;
+            line-height: 1.6;
+        }
+
+        /* Clase para ocultar elementos */
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 520px) {
+            .inputs-grid { grid-template-columns: 1fr; gap: 0; }
+            .container { margin-top: -15px; width: 92%; padding: 25px; border-radius: 12px; }
+            header h1 { font-size: 22px; }
+            .result-value { font-size: 30px; }
+            button { padding: 16px; font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
 <div class="hero-container">
-    <img src="https://i.ibb.co/XRTmGzN/DIMA.jpg" alt="DIMA ELECTRICA Hero" class="hero-image">
+    <img src="https://i.ibb.co/XRTmGzN/DIMA-ELECTRICA-HERO.jpg" alt="DIMA ELECTRICA Hero" class="hero-image">
 </div>
 
 <div class="container">
     <header>
         <h1>BAJA PRO-SERVICES</h1>
-        <p style="font-size: 12px; color: gray;">SISTEMAS FOTOVOLTAICOS PROFESIONALES</p>
+        <p>La Paz, Baja California Sur, MX</p>
     </header>
 
     <form id="solarForm">
-        <span class="section-title">Datos del Cliente</span>
-        <input type="text" id="nombre" placeholder="Nombre completo" required>
-        <input type="tel" id="telefono" placeholder="WhatsApp (10 dígitos)" required>
-        <input type="text" id="direccion" placeholder="Colonia / Ubicación" required>
-
-        <span class="section-title">Configuración de Tarifa</span>
-        <label>Tipo de Contrato</label>
-        <select id="tipoTarifa" onchange="toggleInputs()">
-            <option value="bimestral">Residencial (6 Bimestres)</option>
-            <option value="mensual">Comercial (12 Meses)</option>
-        </select>
-
-        <label>Potencia de Panel (W)</label>
-        <select id="potenciaPanel" onchange="calcular()">
-            <option value="550">550W</option>
-            <option value="620">620W</option>
-            <option value="650">650W</option>
-            <option value="720">720W</option>
-        </select>
-
-        <span class="section-title">Consumo en kWh (Último Año)</span>
+        <span class="section-title">Información del Cliente</span>
+        <input type="text" id="nombre" placeholder="Nombre completo del cliente" required>
         
-        <div id="gridBimestral" class="inputs-grid">
-            <div><label>Bimestre 1</label><input type="number" class="consumo-in" placeholder="0"></div>
-            <div><label>Bimestre 2</label><input type="number" class="consumo-in" placeholder="0"></div>
-            <div><label>Bimestre 3</label><input type="number" class="consumo-in" placeholder="0"></div>
-            <div><label>Bimestre 4</label><input type="number" class="consumo-in" placeholder="0"></div>
-            <div><label>Bimestre 5</label><input type="number" class="consumo-in" placeholder="0"></div>
-            <div><label>Bimestre 6</label><input type="number" class="consumo-in" placeholder="0"></div>
+        <label>Teléfono WhatsApp (10 dígitos)</label>
+        <input type="tel" id="telefono" placeholder="Ej. 6121234567" pattern="[0-9]{10}" required>
+        
+        <label>Dirección / Colonia</label>
+        <input type="text" id="direccion" placeholder="Ej. Col. Centro, Calle Juárez #123" required>
+
+        <span class="section-title">Datos de Consumo CFE (kWh)</span>
+        
+        <label>Tipo de Tarifa</label>
+        <select id="tipoTarifa" onchange="alternarInputsConsumo()">
+            <option value="bimestral">Residencial (6 Bimestres Anuales)</option>
+            <option value="mensual">Comercial (12 Meses Anuales)</option>
+        </select>
+
+        <div id="apartadosBimestrales" class="inputs-grid">
+            <div><label>Bimestre 1</label><input type="number" class="consumo-bimestre" placeholder="0"></div>
+            <div><label>Bimestre 2</label><input type="number" class="consumo-bimestre" placeholder="0"></div>
+            <div><label>Bimestre 3</label><input type="number" class="consumo-bimestre" placeholder="0"></div>
+            <div><label>Bimestre 4</label><input type="number" class="consumo-bimestre" placeholder="0"></div>
+            <div><label>Bimestre 5</label><input type="number" class="consumo-bimestre" placeholder="0"></div>
+            <div><label>Bimestre 6</label><input type="number" class="consumo-bimestre" placeholder="0"></div>
         </div>
 
-        <div id="gridMensual" class="inputs-grid hidden">
-            <div><label>Ene</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Feb</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Mar</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Abr</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>May</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Jun</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Jul</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Ago</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Sep</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Oct</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Nov</label><input type="number" class="consumo-in-m" placeholder="0"></div>
-            <div><label>Dic</label><input type="number" class="consumo-in-m" placeholder="0"></div>
+        <div id="apartadosMensuales" class="inputs-grid hidden">
+            <div><label>Enero</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Febrero</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Marzo</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Abril</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Mayo</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Junio</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Julio</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Agosto</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Septiembre</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Octubre</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Noviembre</label><input type="number" class="consumo-mes" placeholder="0"></div>
+            <div><label>Diciembre</label><input type="number" class="consumo-mes" placeholder="0"></div>
         </div>
+
+        <label>Capacidad del Panel deseado (W)</label>
+        <select id="potenciaPanel" onchange="calcularSistemaSolar()">
+            <option value="550">Panel Solar 550W</option>
+            <option value="620">Panel Solar 620W</option>
+            <option value="650">Panel Solar 650W</option>
+            <option value="720">Panel Solar 720W</option>
+        </select>
 
         <div class="result-box">
-            <div style="font-size: 12px; opacity: 0.8;">PROMEDIO DIARIO: <span id="promedioDiario">0</span> kWh</div>
+            <div class="result-box-label">SISTEMA SUGERIDO CON +10% DE POTENCIA (SIEMPRE PAR):</div>
             <div class="result-value"><span id="panelCount">0</span> PANELES</div>
-            <div style="font-size: 14px;">Inversor Sugerido: <span id="inverterSize">0</span> kW</div>
+            <div class="result-panels">
+                Suma Anual: <span id="kwhAnualTotal">0 kWh</span> | Promedio Diario: <span id="promedioDiarioKwh">0 kWh</span>
+            </div>
         </div>
 
-        <button type="button" onclick="enviarWhatsApp()">ENVIAR COTIZACIÓN A WHATSAPP</button>
+        <button type="button" onclick="enviarWhatsAppCotizacion()">
+            SOLICITAR COTIZACIÓN POR WHATSAPP
+        </button>
     </form>
+
+    <div class="footer-info">
+        Distribuidor Autorizado de <strong style="color:var(--primary-blue)">DIMA ELÉCTRICA</strong><br>
+        Cálculo ajustado a HSP de La Paz, BCS. Baja Pro-Services © 2026
+    </div>
 </div>
 
 <script>
-    function toggleInputs() {
-        const tipo = document.getElementById('tipoTarifa').value;
-        document.getElementById('gridBimestral').classList.toggle('hidden', tipo !== 'bimestral');
-        document.getElementById('gridMensual').classList.toggle('hidden', tipo !== 'mensual');
-        calcular();
+    // Función para mostrar/ocultar apartados mensuales o bimestrales
+    function alternarInputsConsumo() {
+        const tipoTarifa = document.getElementById('tipoTarifa').value;
+        const divBimestrales = document.getElementById('apartadosBimestrales');
+        const divMensuales = document.getElementById('apartadosMensuales');
+
+        if (tipoTarifa === 'bimestral') {
+            divBimestrales.classList.remove('hidden');
+            divMensuales.classList.add('hidden');
+        } else {
+            divBimestrales.classList.add('hidden');
+            divMensuales.classList.remove('hidden');
+        }
+        calcularSistemaSolar(); // Recalcular al cambiar de tarifa
     }
 
-    function calcular() {
-        const tipo = document.getElementById('tipoTarifa').value;
+    // Función principal de cálculo solar
+    function calcularSistemaSolar() {
+        const tipoTarifa = document.getElementById('tipoTarifa').value;
         const panelW = parseFloat(document.getElementById('potenciaPanel').value);
-        let inputs = (tipo === 'bimestral') ? 
-            document.querySelectorAll('.consumo-in') : 
-            document.querySelectorAll('.consumo-in-m');
-        
         let sumaAnual = 0;
-        inputs.forEach(i => sumaAnual += (parseFloat(i.value) || 0));
+
+        // Determinar qué inputs sumar
+        let inputs;
+        if (tipoTarifa === 'bimestral') {
+            inputs = document.querySelectorAll('.consumo-bimestre');
+        } else {
+            inputs = document.querySelectorAll('.consumo-mes');
+        }
+
+        // Sumar todos los kWh ingresados
+        inputs.forEach(input => {
+            sumaAnual += parseFloat(input.value) || 0;
+        });
+
+        // Actualizar UI con suma total
+        document.getElementById('kwhAnualTotal').innerText = sumaAnual.toLocaleString('es-MX') + " kWh";
+
+        if (sumaAnual === 0) {
+            document.getElementById('promedioDiarioKwh').innerText = "0 kWh";
+            document.getElementById('panelCount').innerText = "0";
+            return;
+        }
+
+        // Promedio diario (asumiendo 365 días)
+        const kwhDiarioPromedio = sumaAnual / 365;
+        document.getElementById('promedioDiarioKwh').innerText = kwhDiarioPromedio.toFixed(2) + " kWh";
+
+        // Parámetros técnicos para La Paz, BCS: 
+        // 1. HSP promedio de 5.5.
+        // 2. Factor de pérdida de eficiencia (HSP * Factor Eficiencia 0.8)
         
-        if (sumaAnual === 0) return;
-
-        // Promedio diario (365 días)
-        let kwhDiario = sumaAnual / 365;
-        document.getElementById('promedioDiario').innerText = kwhDiario.toFixed(2);
-
-        // Cálculo: (kWh_diario * 1000) / (W_panel * HSP_LaPaz 5.5 * Eficiencia 0.8)
-        let numPanelesBase = (kwhDiario * 1000) / (panelW * 5.5 * 0.8);
+        // Cálculo de paneles base (HSP 5.5 * Factor Pérdida 0.8)
+        let numPanelesBase = (kwhDiarioPromedio * 1000) / (panelW * 5.5 * 0.80);
         
-        // +10% de margen
-        let numPanelesConExtra = numPanelesBase * 1.10;
+        // APLICAR MARGEN EXTRA DEL +10% DE POTENCIA
+        let numPanelesConMargen = numPanelesBase * 1.10;
 
-        // Redondeo a PARES superior
-        let finalPaneles = Math.ceil(numPanelesConExtra);
-        if (finalPaneles % 2 !== 0) finalPaneles++;
+        // REDONDEO A LA SIGUIENTE CANTIDAD PAR SUPERIOR
+        // 1. Math.ceil para redondear al siguiente entero (ej. 3.1 -> 4, 3.9 -> 4)
+        let totalPanelesFinal = Math.ceil(numPanelesConMargen);
+        // 2. Si es impar, sumamos 1 para que sea par
+        if (totalPanelesFinal % 2 !== 0) {
+            totalPanelesFinal++; 
+        }
 
-        // Inversor (Potencia instalada * 0.9 para dimensionamiento real)
-        let potenciaKW = (finalPaneles * panelW) / 1000;
-        let invSug = (potenciaKW * 0.9).toFixed(1);
-
-        document.getElementById('panelCount').innerText = finalPaneles;
-        document.getElementById('inverterSize').innerText = invSug;
+        // Actualizar UI con el resultado final
+        document.getElementById('panelCount').innerText = (sumaAnual > 0) ? totalPanelesFinal : 0;
     }
 
-    // Escuchar cambios en todos los inputs
-    document.querySelectorAll('input').forEach(el => {
-        el.addEventListener('input', calcular);
+    // Escuchar cambios en todos los inputs de consumo para recalcular en tiempo real
+    document.querySelectorAll('.consumo-bimestre, .consumo-mes, #tipoTarifa, #potenciaPanel').forEach(el => {
+        el.addEventListener('input', calcularSistemaSolar);
     });
 
-    function enviarWhatsApp() {
+    // Función para enviar mensaje de WhatsApp
+    function enviarWhatsAppCotizacion() {
         const nombre = document.getElementById('nombre').value;
+        const tel = document.getElementById('telefono').value;
+        const dir = document.getElementById('direccion').value;
         const paneles = document.getElementById('panelCount').innerText;
-        const inversor = document.getElementById('inverterSize').innerText;
         const pW = document.getElementById('potenciaPanel').value;
-        const tipo = document.getElementById('tipoTarifa').value;
+        const tipo = document.getElementById('tipoTarifa').options[document.getElementById('tipoTarifa').selectedIndex].text;
+        const promedio = document.getElementById('promedioDiarioKwh').innerText;
 
-        if(!nombre || paneles == "0") { alert("Por favor ingresa datos de consumo."); return; }
+        // Validación básica
+        if(!nombre || !paneles || !tel || !dir || paneles === "0") {
+            alert("Por favor completa los datos del cliente e ingresa el consumo de kWh.");
+            return;
+        }
 
-        const msg = `*SOLICITUD DE COTIZACIÓN - BAJA PRO-SERVICES*%0A` +
-                    `👤 *Cliente:* ${nombre}%0A` +
-                    `📋 *Contrato:* ${tipo.toUpperCase()}%0A` +
-                    `☀️ *Sistema:* ${paneles} paneles de ${pW}W%0A` +
-                    `🔌 *Inversor:* ${inversor} kW sugerido%0A` +
-                    `----------------------------%0A` +
-                    `_Cálculo basado en promedio anual +10% de reserva._`;
+        const telLimpio = tel.replace(/\D/g,'');
+        if(telLimpio.length !== 10) {
+            alert("El número de teléfono WhatsApp debe tener 10 dígitos.");
+            return;
+        }
 
-        window.open(`https://wa.me/526122198325?text=${msg}`, '_blank');
+        const mensaje = `*NUEVA SOLICITUD DE COTIZACIÓN*%0A` +
+                        `------------------------------------%0A` +
+                        `👤 *Cliente:* ${nombre}%0A` +
+                        `📞 *Teléfono:* ${telLimpio}%0A` +
+                        `📍 *Ubicación:* ${dir}%0A` +
+                        `------------------------------------%0A` +
+                        `📊 *Tarifa CFE:* ${tipo}%0A` +
+                        `🔌 *Promedio Diario:* ${promedio}%0A` +
+                        `☀️ *Sistema Sugerido:* *${paneles}* paneles de ${pW}W%0A` +
+                        `_*(Resultado incluye +10% de potencia y redondeo par.)_%0A` +
+                        `------------------------------------%0A` +
+                        `Calculadora Baja Pro-Services`;
+
+        window.open(`https://wa.me/526122198325?text=${mensaje}`, '_blank');
     }
+
+    // Inicialización al cargar
+    calcularSistemaSolar();
 </script>
 
 </body>
