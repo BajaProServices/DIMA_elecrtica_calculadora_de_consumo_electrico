@@ -1,0 +1,360 @@
+<index.html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador Solar Profesional | BAJA PRO-SERVICES</title>
+    <style>
+        /* PALETA DE COLORES AJUSTADA A DIMA ELECTRICA */
+        :root {
+            --primary-blue: #1a2e41; /* Azul marino profundo del texto "DIMA" */
+            --accent-orange: #ff7f00; /* Naranja vibrante del logo esférico */
+            --bg-light-green: #e8f5e9; /* Verde muy suave inspirado en el fondo */
+            --text-dark: #2c3e50;
+            --success-green: #27ae60;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f7; /* Fondo gris-azulado muy claro */
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        /* Estilos para el Hero Image */
+        .hero-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 0;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            /* Borde inferior sutil en azul */
+            border-bottom: 3px solid var(--primary-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: -30px auto 50px; /* Sube un poco más para un efecto overlay moderno */
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(26, 46, 65, 0.1); /* Borde azul muy tenue */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        header h1 { 
+            margin: 0; 
+            color: var(--primary-blue); /* Texto en azul profesional */
+            font-size: 28px; 
+            font-weight: 800; 
+            letter-spacing: -0.5px;
+        }
+        header p { 
+            margin: 8px 0 0; 
+            font-size: 13px; 
+            color: #7f8c8d; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-weight: 700;
+            margin: 25px 0 12px;
+            display: block;
+            border-left: 4px solid var(--accent-orange); /* Acento en naranja */
+            padding-left: 12px;
+            color: var(--primary-blue); /* Texto del título en azul */
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        label { 
+            display: block; 
+            margin-bottom: 6px; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: var(--primary-blue);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border: 2px solid #e0e0e0; /* Borde más definido */
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            color: var(--text-dark);
+        }
+
+        /* Enfoque en azul profesional */
+        input:focus, select:focus { 
+            border-color: var(--primary-blue); 
+            outline: none; 
+            box-shadow: 0 0 0 3px rgba(26, 46, 65, 0.1);
+        }
+
+        .grid-half {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Caja de resultados: Fondo azul profesional */
+        .result-box {
+            background: var(--primary-blue); /* Fondo azul marino */
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 25px;
+            border-bottom: 6px solid var(--accent-orange); /* Acento inferior en naranja */
+            box-shadow: 0 6px 15px rgba(26, 46, 65, 0.2);
+        }
+
+        .result-box-label {
+            font-size: 15px; 
+            opacity: 0.85; 
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Valor destacado en naranja vibrante */
+        .result-value {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--accent-orange); /* Texto en naranja */
+            margin: 10px 0;
+            letter-spacing: -1px;
+        }
+
+        .result-panels {
+            margin-top: 12px; 
+            font-size: 16px; 
+            font-weight: 500;
+            background: rgba(255,255,255,0.1);
+            padding: 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* Botón de WhatsApp: Mantenemos verde para acción */
+        button {
+            width: 100%;
+            background-color: var(--success-green);
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        button:hover { 
+            background-color: #219150; 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .footer-info {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 30px;
+            color: #95a5a6;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 520px) {
+            .grid-half { grid-template-columns: 1fr; gap: 0; }
+            .container { margin-top: -15px; width: 92%; padding: 25px; border-radius: 12px; }
+            header h1 { font-size: 22px; }
+            .result-value { font-size: 30px; }
+            button { padding: 16px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero-container">
+    <img src="https://i.ibb.co/XRTmGzN/DIMA-ELECTRICA-HERO.jpg" alt="DIMA ELECTRICA Soluciones Solares" class="hero-image">
+</div>
+
+<div class="container">
+    <header>
+        <h1>BAJA PRO-SERVICES</h1>
+        <p>La Paz, Baja California Sur, MX</p>
+    </header>
+
+    <form id="solarForm">
+        <span class="section-title">Información del Cliente</span>
+        <input type="text" id="nombre" placeholder="Nombre completo del cliente" required>
+        
+        <label>Teléfono WhatsApp (10 dígitos)</label>
+        <input type="tel" id="telefono" placeholder="Ej. 6121234567" pattern="[0-9]{10}" required>
+        
+        <label>Dirección / Colonia</label>
+        <input type="text" id="direccion" placeholder="Ej. Col. Centro, Calle Juárez #123" required>
+
+        <span class="section-title">Datos de Consumo CFE</span>
+        <div class="grid-half">
+            <div>
+                <label>Tipo de Tarifa</label>
+                <select id="tipoTarifa">
+                    <option value="bimestral">Residencial (Bimestral)</option>
+                    <option value="mensual">Comercial (Mensual)</option>
+                </select>
+            </div>
+            <div>
+                <label>Consumo total (kW)</label>
+                <input type="number" id="kwInput" placeholder="Ej. 1500" maxlength="10" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);" required>
+            </div>
+        </div>
+
+        <label>Capacidad del Panel deseado (W)</label>
+        <select id="potenciaPanel">
+            <option value="550">Panel Solar 550W</option>
+            <option value="620">Panel Solar 620W</option>
+            <option value="650">Panel Solar 650W</option>
+            <option value="720">Panel Solar 720W</option>
+        </select>
+
+        <div class="result-box">
+            <div class="result-box-label">TU CONSUMO TOTAL ESTIMADO ES DE:</div>
+            <div class="result-value" id="kwhResult">0 kWh</div>
+            <div class="result-panels">
+                Necesitas: <span id="panelCount" style="color:var(--accent-orange); font-weight:800; font-size: 1.1em;">0</span> paneles solares
+            </div>
+        </div>
+
+        <button type="button" onclick="enviarWhatsApp()">
+            SOLICITAR COTIZACIÓN POR WHATSAPP
+        </button>
+    </form>
+
+    <div class="footer-info">
+        Distribuidor Autorizado de <strong style="color:var(--primary-blue)">DIMA ELÉCTRICA</strong><br>
+        Baja Pro-Services © 2026 | Especialistas en BCS
+    </div>
+</div>
+
+<script>
+    const kwInput = document.getElementById('kwInput');
+    const tipoTarifa = document.getElementById('tipoTarifa');
+    const potenciaPanel = document.getElementById('potenciaPanel');
+    const kwhResult = document.getElementById('kwhResult');
+    const panelCount = document.getElementById('panelCount');
+
+    function calcular() {
+        // Obtenemos kW y lo tratamos como kWh totales del periodo
+        const kw = parseFloat(kwInput.value) || 0;
+        const panelW = parseFloat(potenciaPanel.value);
+        
+        let kwhTotal = kw; 
+        
+        // Días según tarifa
+        let periodoDias = (tipoTarifa.value === 'bimestral') ? 60 : 30;
+        
+        // Promedio diario
+        let kwhDiario = kwhTotal / periodoDias;
+        
+        // Estimación ajustada para La Paz, BCS (HSP 5.5, Factor eficiencia 0.80)
+        // Fórmula: (kWh_diarios * 1000W/1kW) / (Potencia_Panel_W * HSP * Factor_Pérdida)
+        let numPaneles = Math.ceil((kwhDiario * 1000) / (panelW * 5.5 * 0.80));
+
+        // Actualizar interfaz con formato
+        kwhResult.innerText = kwhTotal.toLocaleString('es-MX') + " kWh";
+        panelCount.innerText = (kw > 0) ? numPaneles.toLocaleString('es-MX') : "0";
+    }
+
+    // Eventos para recalcular al cambiar cualquier dato
+    [kwInput, tipoTarifa, potenciaPanel].forEach(el => {
+        el.addEventListener('input', calcular);
+    });
+
+    function enviarWhatsApp() {
+        // Obtener valores
+        const nombre = document.getElementById('nombre').value;
+        const tel = document.getElementById('telefono').value;
+        const dir = document.getElementById('direccion').value;
+        const kw = kwInput.value;
+        const kwh = kwhResult.innerText;
+        const paneles = panelCount.innerText;
+        const tipo = tipoTarifa.options[tipoTarifa.selectedIndex].text;
+        const pW = potenciaPanel.value;
+
+        // Validación básica
+        if(!nombre || !kw || !tel || !dir) {
+            alert("Por favor completa todos los datos del cliente antes de enviar.");
+            return;
+        }
+
+        // Formato del número de teléfono (solo números)
+        const telLimpio = tel.replace(/\D/g,'');
+        if(telLimpio.length !== 10) {
+            alert("El número de teléfono debe tener 10 dígitos.");
+            return;
+        }
+
+        // Construir mensaje profesional y ordenado
+        const mensaje = `*NUEVA SOLICITUD DE COTIZACIÓN*%0A` +
+                        `------------------------------------%0A` +
+                        `*DATOS DEL CLIENTE*%0A` +
+                        `------------------------------------%0A` +
+                        `👤 *Nombre:* ${nombre}%0A` +
+                        `📞 *WhatsApp:* ${telLimpio}%0A` +
+                        `📍 *Ubicación:* ${dir}%0A` +
+                        `------------------------------------%0A` +
+                        `*DATOS TÉCNICOS DE CONSUMO*%0A` +
+                        `------------------------------------%0A` +
+                        `📊 *Tarifa CFE:* ${tipo}%0A` +
+                        `🔌 *Consumo Ingresado:* ${kw} kW%0A` +
+                        `✅ *Total Periodo:* ${kwh}%0A` +
+                        `------------------------------------%0A` +
+                        `*SISTEMA SOLAR SUGERIDO*%0A` +
+                        `------------------------------------%0A` +
+                        `☀️ *Paneles Necesarios:* *${paneles}* unidades%0A` +
+                        `⚙️ *Potencia Panel:* ${pW} Watts%0A` +
+                        `------------------------------------%0A` +
+                        `Enviado desde Calculadora Baja Pro-Services`;
+
+        // Abrir WhatsApp con tu número
+        window.open(`https://wa.me/526122198325?text=${mensaje}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
