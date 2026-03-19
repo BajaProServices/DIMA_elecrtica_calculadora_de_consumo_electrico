@@ -339,3 +339,330 @@
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador Solar | BAJA PRO-SERVICES</title>
+    <style>
+        :root {
+            --emerald-bg: #d1fae5; /* Light Emerald Green */
+            --emerald-primary: #10b981;
+            --emerald-dark: #064e3b;
+            --emerald-accent: #059669;
+            --white: #ffffff;
+            --text-main: #1f2937;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--emerald-bg);
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+        }
+
+        .top-bar {
+            background-color: var(--emerald-dark);
+            color: white;
+            text-align: center;
+            padding: 8px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 4px solid var(--emerald-primary);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto 50px; /* Removed negative margin to ensure hero is not obstructed */
+            background: var(--white);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(6, 78, 59, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .lang-switch {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--emerald-primary);
+            color: var(--emerald-primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .lang-btn.active {
+            background: var(--emerald-primary);
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0fdf4;
+            padding-bottom: 15px;
+        }
+
+        header h1 { margin: 0; color: var(--emerald-dark); font-size: 26px; }
+        header p { margin: 5px 0 0; font-size: 13px; color: var(--emerald-primary); font-weight: 700; }
+
+        .section-title {
+            font-weight: 700;
+            margin: 25px 0 12px;
+            display: block;
+            border-left: 4px solid var(--emerald-primary);
+            padding-left: 12px;
+            color: var(--emerald-dark);
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        input, select, label {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: var(--emerald-dark); }
+
+        input, select {
+            padding: 12px;
+            margin-bottom: 18px;
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .cert-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .icon-item img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .icon-item span {
+            display: block;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--emerald-dark);
+            line-height: 1.2;
+        }
+
+        .result-box {
+            background: var(--emerald-dark);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 25px 0;
+            border-bottom: 5px solid var(--emerald-primary);
+        }
+
+        .result-value {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--emerald-primary);
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--emerald-primary);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    CABO SAN LUCAS • SAN JOSÉ DEL CABO • LA PAZ, BCS, MX
+</div>
+
+<div class="hero-container">
+    <img src="DIMA.png" alt="BAJA PRO-SERVICES Hero" class="hero-image">
+</div>
+
+<div class="container">
+    <div class="lang-switch">
+        <button id="btn-es" class="lang-btn active" onclick="changeLang('es')">ES</button>
+        <button id="btn-en" class="lang-btn" onclick="changeLang('en')">EN</button>
+    </div>
+
+    <header>
+        <h1>BAJA PRO-SERVICES</h1>
+        <p id="tagline">Energía Solar de Alta Eficiencia</p>
+    </header>
+
+    <form id="solarForm">
+        <span class="section-title" id="t-client">Información del Cliente</span>
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+        <input type="tel" id="telefono" placeholder="WhatsApp" required>
+        <input type="text" id="direccion" placeholder="Ubicación" required>
+
+        <span class="section-title" id="t-usage">Consumo (kWh)</span>
+        <select id="tipoTarifa" onchange="alternarInputs()">
+            <option value="bimestral" id="opt-bi">Residencial (Bimestral)</option>
+            <option value="mensual" id="opt-me">Comercial (Mensual)</option>
+        </select>
+
+        <div id="gridBimestre" class="inputs-grid">
+            <div><label>B1</label><input type="number" class="in-kwh" placeholder="0"></div>
+            <div><label>B2</label><input type="number" class="in-kwh" placeholder="0"></div>
+            <div><label>B3</label><input type="number" class="in-kwh" placeholder="0"></div>
+            <div><label>B4</label><input type="number" class="in-kwh" placeholder="0"></div>
+            <div><label>B5</label><input type="number" class="in-kwh" placeholder="0"></div>
+            <div><label>B6</label><input type="number" class="in-kwh" placeholder="0"></div>
+        </div>
+
+        <div id="gridMes" class="inputs-grid hidden">
+            <div><label>1</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>2</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>3</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>4</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>5</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>6</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>7</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>8</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>9</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>10</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>11</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+            <div><label>12</label><input type="number" class="in-kwh-m" placeholder="0"></div>
+        </div>
+
+        <span class="section-title" id="t-certs">Certificaciones y Calidad</span>
+        <div class="cert-card">
+            <strong>EC0586.01:</strong> <span id="cert1">Instalación de Sistemas Fotovoltaicos (PFVI).</span>
+        </div>
+        <div class="cert-card">
+            <strong>EC1181:</strong> <span id="cert2">Supervisión de Instalaciones (IPV).</span>
+        </div>
+
+        <div class="icon-grid">
+            <div class="icon-item"><img src="110Ah.png" alt="110Ah"><span>110Ah</span></div>
+            <div class="icon-item"><img src="6000ciclos.png" alt="6000"><span>6000 CICLOS</span></div>
+            <div class="icon-item"><img src="wifi.png" alt="Wifi"><span>WIFI SMART</span></div>
+            <div class="icon-item"><img src="ulcert.png" alt="UL"><span>UL CERTIFIED</span></div>
+            <div class="icon-item"><img src="compatible-bate.png" alt="Battery"><span>BATTERY READY</span></div>
+            <div class="icon-item"><img src="10aosdegarantia.png" alt="Warranty"><span>10 AÑOS</span></div>
+            <div class="icon-item"><img src="optimizada-energia-solar.png" alt="Solar"><span>SOLAR OPT</span></div>
+            <div class="icon-item"><img src="heavy-duty.png" alt="HD"><span>HEAVY DUTY</span></div>
+            <div class="icon-item"><img src="descarga.png" alt="Deep"><span>DEEP DISCHARGE</span></div>
+        </div>
+
+        <div class="result-box">
+            <div id="t-result">SISTEMA SUGERIDO:</div>
+            <div class="result-value"><span id="panelCount">0</span> <span id="t-panels">PANELES</span></div>
+        </div>
+
+        <label id="l-dept">Enviar a departamento:</label>
+        <select id="waNumber">
+            <option value="5216243554783">RAFAEL REYES - SALES</option>
+            <option value="5216122198325">TECHNICAL SUPPORT</option>
+        </select>
+
+        <button type="button" onclick="enviarWA()" id="btn-wa">SOLICITAR COTIZACIÓN</button>
+    </form>
+</div>
+
+<script>
+    function alternarInputs() {
+        const tipo = document.getElementById('tipoTarifa').value;
+        document.getElementById('gridBimestre').classList.toggle('hidden', tipo !== 'bimestral');
+        document.getElementById('gridMes').classList.toggle('hidden', tipo !== 'mensual');
+    }
+
+    function enviarWA() {
+        const nombre = document.getElementById('nombre').value;
+        const tel = document.getElementById('telefono').value;
+        const loc = document.getElementById('direccion').value;
+        const panels = document.getElementById('panelCount').innerText;
+        const num = document.getElementById('waNumber').value;
+
+        if(!nombre || panels === "0") {
+            alert("Por favor ingrese sus datos y consumo.");
+            return;
+        }
+
+        const msg = encodeURIComponent(
+            `*COTIZACIÓN SOLAR - DIMA ELECTRICA - BAJA PRO-SERVICES*\n` +
+            `Cliente: ${nombre}\n` +
+            `WhatsApp: ${tel}\n` +
+            `Ubicación: ${loc}\n` +
+            `Sugerencia: ${panels} Paneles`
+        );
+        window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => {
+            let sum = 0;
+            document.querySelectorAll('.in-kwh, .in-kwh-m').forEach(i => sum += Number(i.value));
+            document.getElementById('panelCount').innerText = Math.ceil(sum / 150) || 0;
+        });
+    });
+</script>
+</body>
+</html>
