@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizador Solar | BAJA PRO-SERVICES</title>
+    <title>Cotizador Solar Pro | BAJA PRO-SERVICES</title>
     <style>
         :root {
-            --emerald-bg: #d1fae5; /* Light Emerald Green */
+            --aqua-bg: #e0f7fa; /* Light Aqua Green solicitado */
             --emerald-primary: #10b981;
             --emerald-dark: #064e3b;
-            --emerald-accent: #059669;
             --white: #ffffff;
             --text-main: #1f2937;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--emerald-bg);
+            background-color: var(--aqua-bg);
             margin: 0;
             padding: 0;
             color: var(--text-main);
@@ -29,166 +28,66 @@
             padding: 8px 10px;
             font-size: 11px;
             font-weight: 600;
-            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
-        .hero-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-bottom: 4px solid var(--emerald-primary);
-        }
+        .hero-container { width: 100%; max-width: 800px; margin: 0 auto; }
+        .hero-image { width: 100%; height: auto; display: block; border-bottom: 4px solid var(--emerald-primary); }
 
         .container {
-            max-width: 600px;
-            margin: 20px auto 50px; /* Removed negative margin to ensure hero is not obstructed */
+            max-width: 650px;
+            margin: 20px auto 50px;
             background: var(--white);
             padding: 35px;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(6, 78, 59, 0.1);
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0, 100, 100, 0.1);
         }
 
-        .lang-switch {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--emerald-primary);
-            color: var(--emerald-primary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        .lang-btn.active {
-            background: var(--emerald-primary);
-            color: white;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #f0fdf4;
-            padding-bottom: 15px;
-        }
-
+        header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #e0f2f1; padding-bottom: 15px; }
         header h1 { margin: 0; color: var(--emerald-dark); font-size: 26px; }
-        header p { margin: 5px 0 0; font-size: 13px; color: var(--emerald-primary); font-weight: 700; }
 
         .section-title {
-            font-weight: 700;
-            margin: 25px 0 12px;
-            display: block;
-            border-left: 4px solid var(--emerald-primary);
-            padding-left: 12px;
-            color: var(--emerald-dark);
-            font-size: 15px;
-            text-transform: uppercase;
+            font-weight: 700; margin: 25px 0 12px; display: block;
+            border-left: 4px solid var(--emerald-primary); padding-left: 12px;
+            color: var(--emerald-dark); font-size: 15px; text-transform: uppercase;
         }
-
-        input, select, label {
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: var(--emerald-dark); }
 
         input, select {
-            padding: 12px;
-            margin-bottom: 18px;
-            background: #fff;
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            font-size: 15px;
-            color: var(--text-main);
+            width: 100%; padding: 12px; margin-bottom: 18px;
+            border: 1px solid #d1d5db; border-radius: 10px; font-size: 15px;
         }
 
         .inputs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            background: #f0fdf4;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-
-        .cert-card {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            font-size: 13px;
-        }
-
-        .icon-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-            text-align: center;
-        }
-
-        .icon-item img {
-            width: 45px;
-            height: 45px;
-            object-fit: contain;
-            margin-bottom: 8px;
-        }
-
-        .icon-item span {
-            display: block;
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--emerald-dark);
-            line-height: 1.2;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+            background: #f0fdf4; padding: 15px; border-radius: 12px;
         }
 
         .result-box {
-            background: var(--emerald-dark);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 25px 0;
+            background: var(--emerald-dark); color: white; padding: 25px;
+            border-radius: 15px; text-align: center; margin: 25px 0;
             border-bottom: 5px solid var(--emerald-primary);
         }
 
-        .result-value {
-            font-size: 38px;
-            font-weight: 800;
-            color: var(--emerald-primary);
-            margin: 10px 0;
+        .result-value { font-size: 38px; font-weight: 800; color: var(--emerald-primary); margin: 5px 0; }
+        
+        .metrics-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            margin-top: 15px; font-size: 13px; text-align: left;
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;
         }
 
+        .icon-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+            margin: 25px 0; text-align: center;
+        }
+
+        .icon-item img { width: 40px; height: 40px; margin-bottom: 5px; }
+        .icon-item span { display: block; font-size: 9px; font-weight: 800; color: var(--emerald-dark); }
+
         button {
-            width: 100%;
-            background-color: var(--emerald-primary);
-            color: white;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
+            width: 100%; background-color: var(--emerald-primary); color: white;
+            padding: 18px; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: 700; cursor: pointer;
         }
 
         .hidden { display: none; }
@@ -196,258 +95,155 @@
 </head>
 <body>
 
-<div class="top-bar">
-    CABO SAN LUCAS • SAN JOSÉ DEL CABO • LA PAZ, BCS, MX
-</div>
+<div class="top-bar">LORETO • LA PAZ • CABO SAN LUCAS • SAN JOSÉ DEL CABO</div>
 
 <div class="hero-container">
     <img src="DIMA.png" alt="BAJA PRO-SERVICES Hero" class="hero-image">
 </div>
 
 <div class="container">
-    <div class="lang-switch">
-        <button id="btn-es" class="lang-btn active" onclick="changeLang('es')">ES</button>
-        <button id="btn-en" class="lang-btn" onclick="changeLang('en')">EN</button>
+    <div id="admin-settings" style="background:#f1f5f9; padding:15px; border-radius:10px; margin-bottom:20px; border:1px dashed #cbd5e1;">
+        <label style="font-size:11px; color:#64748b;">POTENCIA PANEL INTERNA (W):</label>
+        <select id="potenciaPanel" onchange="recalcularTodo()">
+            <option value="480">480W</option>
+            <option value="550">550W</option>
+            <option value="620">620W</option>
+            <option value="680" selected>680W</option>
+        </select>
     </div>
 
     <header>
         <h1>BAJA PRO-SERVICES</h1>
-        <p id="tagline">Energía Solar de Alta Eficiencia</p>
+        <p style="color:var(--emerald-primary); font-weight:700;">Ingeniería Solar y Resiliencia Energética</p>
     </header>
 
     <form id="solarForm">
-        <span class="section-title" id="t-client">Información del Cliente</span>
+        <span class="section-title">Información del Cliente</span>
         <input type="text" id="nombre" placeholder="Nombre completo" required>
         <input type="tel" id="telefono" placeholder="WhatsApp" required>
-        <input type="text" id="direccion" placeholder="Ubicación" required>
+        <input type="text" id="direccion" placeholder="Ubicación (Ej. Loreto, BCS)">
 
-        <span class="section-title" id="t-usage">Consumo (kWh)</span>
-        <select id="tipoTarifa" onchange="alternarInputs()">
-            <option value="bimestral" id="opt-bi">Residencial (Bimestral)</option>
-            <option value="mensual" id="opt-me">Comercial (Mensual)</option>
-        </select>
-
-        <div id="gridBimestre" class="inputs-grid">
-            <div><label>B1</label><input type="number" class="in-kwh" placeholder="0"></div>
-            <div><label>B2</label><input type="number" class="in-kwh" placeholder="0"></div>
-            <div><label>B3</label><input type="number" class="in-kwh" placeholder="0"></div>
-            <div><label>B4</label><input type="number" class="in-kwh" placeholder="0"></div>
-            <div><label>B5</label><input type="number" class="in-kwh" placeholder="0"></div>
-            <div><label>B6</label><input type="number" class="in-kwh" placeholder="0"></div>
-        </div>
-
-        <div id="gridMes" class="inputs-grid hidden">
-            <div><label>1</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>2</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>3</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>4</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>5</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>6</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>7</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>8</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>9</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>10</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>11</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-            <div><label>12</label><input type="number" class="in-kwh-m" placeholder="0"></div>
-        </div>
-
-        <div id="intern-config" class="hidden">
-            <span class="section-title">Configuración Interna</span>
-            <label>Potencia del Panel a Cotizar (Watts)</label>
-            <select id="potenciaPanel" onchange="recalcularTotal()">
-                <option value="480">480W</option>
-                <option value="550">550W</option>
-                <option value="620">620W</option>
-                <option value="680" selected>680W</option>
-            </select>
-        </div>
-
-        <span class="section-title" id="t-certs">Certificaciones y Calidad</span>
-        <div class="cert-card">
-            <strong>EC0586.01:</strong> <span id="cert1">Instalación de Sistemas Fotovoltaicos (PFVI).</span>
-        </div>
-        <div class="cert-card">
-            <strong>EC1181:</strong> <span id="cert2">Supervisión de Instalaciones (IPV).</span>
-        </div>
-
-        <div class="icon-grid">
-            <div class="icon-item"><img src="110Ah.png" alt="110Ah"><span>110Ah</span></div>
-            <div class="icon-item"><img src="6000ciclos.png" alt="6000"><span>6000 CICLOS</span></div>
-            <div class="icon-item"><img src="wifi.png" alt="Wifi"><span>WIFI SMART</span></div>
-            <div class="icon-item"><img src="ulcert.png" alt="UL"><span>UL CERTIFIED</span></div>
-            <div class="icon-item"><img src="compatible-bate.png" alt="Battery"><span>BATTERY READY</span></div>
-            <div class="icon-item"><img src="10aosdegarantia.png" alt="Warranty"><span>10 AÑOS</span></div>
-            <div class="icon-item"><img src="optimizada-energia-solar.png" alt="Solar"><span>SOLAR OPT</span></div>
-            <div class="icon-item"><img src="heavy-duty.png" alt="HD"><span>HEAVY DUTY</span></div>
-            <div class="icon-item"><img src="descarga.png" alt="Deep"><span>DEEP DISCHARGE</span></div>
+        <span class="section-title">Consumo CFE (kWh Bimestrales)</span>
+        <div class="inputs-grid">
+            <div><label style="font-size:10px;">B1</label><input type="number" class="in-kwh" placeholder="0" oninput="recalcularTodo()"></div>
+            <div><label style="font-size:10px;">B2</label><input type="number" class="in-kwh" placeholder="0" oninput="recalcularTodo()"></div>
+            <div><label style="font-size:10px;">B3</label><input type="number" class="in-kwh" placeholder="0" oninput="recalcularTodo()"></div>
+            <div><label style="font-size:10px;">B4</label><input type="number" class="in-kwh" placeholder="0" oninput="recalcularTodo()"></div>
+            <div><label style="font-size:10px;">B5</label><input type="number" class="in-kwh" placeholder="0" oninput="recalcularTodo()"></div>
+            <div><label style="font-size:10px;">B6</label><input type="number" class="in-kwh" placeholder="0" oninput="recalcularTodo()"></div>
         </div>
 
         <div class="result-box">
-            <div id="t-result">SISTEMA SUGERIDO:</div>
-            <div class="result-value"><span id="panelCount">0</span> <span id="t-panels">PANELES</span></div>
-            <div id="sugInversor" style="font-size: 14px; color: #a7f3d0; margin-top: 10px;">Ingresa tus consumos</div>
+            <div style="font-size:12px; letter-spacing:1px;">SISTEMA SUGERIDO</div>
+            <div class="result-value"><span id="panelCount">0</span> PANELES</div>
+            <div id="invSugerido" style="color:#a7f3d0; font-size:13px; font-weight:bold;">Inversor Sugerido: ---</div>
+            
+            <div class="metrics-grid">
+                <div>Prod. Diaria: <span id="prodDia">0</span> kWh</div>
+                <div>Prod. Mensual: <span id="prodMes">0</span> kWh</div>
+                <div>ROI Est: <span id="roiVal">0</span> Años</div>
+                <div>Ahorro Anual: <span id="ahorroVal">$0</span></div>
+            </div>
         </div>
 
-        <label id="l-dept">Enviar a departamento:</label>
-        <select id="waNumber">
-            <option value="5216243554783">RAFAEL REYES - SALES</option>
-            <option value="5216122198325">TECHNICAL SUPPORT</option>
-        </select>
+        <span class="section-title">Componentes y Accesorios Incluidos</span>
+        <div class="icon-grid">
+            <div class="icon-item"><img src="ulcert.png"><span>UL CERTIFIED</span></div>
+            <div class="icon-item"><img src="wifi.png"><span>SMART WIFI</span></div>
+            <div class="icon-item"><img src="10aosdegarantia.png"><span>10 AÑOS ESTRUCTURA</span></div>
+            <div class="icon-item"><img src="unirack.png"><span>UNIRACK MARINA</span></div>
+            <div class="icon-item"><img src="protecciones.png"><span>SUPRESOR PICOS</span></div>
+            <div class="icon-item"><img src="cablesolar.png"><span>CABLE CAL 10</span></div>
+        </div>
 
-        <button type="button" onclick="enviarWA()" id="btn-wa">SOLICITAR COTIZACIÓN</button>
+        <button type="button" onclick="enviarWhatsApp()">SOLICITAR COTIZACIÓN PROFESIONAL</button>
     </form>
 </div>
 
 <script>
-    // Parámetros técnicos Baja Pro-Services
-    const HSP = 6.1; // Incidencia solar ajustada
-    const FACTOR_SEGURIDAD = 1.25; // Compensación de pérdidas (80% eficiencia real)
+    // BANCO DE DATOS CFE (Lógica Interna)
+    const TARIFA_CFE = {
+        basico: 0.98,
+        intermedio: 1.19,
+        excedente: 3.52,
+        dac: 6.38,
+        iva: 1.16
+    };
 
-    function alternarInputs() {
-        const tipo = document.getElementById('tipoTarifa').value;
-        document.getElementById('gridBimestre').classList.toggle('hidden', tipo !== 'bimestral');
-        document.getElementById('gridMes').classList.toggle('hidden', tipo !== 'mensual');
-        recalcularTotal(); // Recalcular al cambiar el tipo
-    }
+    const HSP = 6.1; // Incidencia solar Baja California Sur
+    const EFICIENCIA = 0.80; 
 
-    function recalcularTotal() {
-        let sumKwh = 0;
-        const tipoTarifa = document.getElementById('tipoTarifa').value;
-        const potenciaPanelW = parseFloat(document.getElementById('potenciaPanel').value);
-        const inputClass = tipoTarifa === 'bimestral' ? '.in-kwh' : '.in-kwh-m';
-        const numPeriodos = tipoTarifa === 'bimestral' ? 6 : 12;
-
-        document.querySelectorAll(inputClass).forEach(i => sumKwh += Number(i.value));
-
-        if (sumKwh > 0 && potenciaPanelW > 0) {
-            // 1. Promedio Diario de Consumo (kWh/día)
-            // Se asume que la suma es anual (6 bimestres o 12 meses)
-            const promedioDiarioKwh = sumKwh / 365;
-
-            // 2. Producción Diaria por Panel (kWh/día por panel)
-            // Fórmula: (Potencia W / 1000) * HSP / Factor Seguridad
-            const kwPanel = potenciaPanelW / 1000;
-            const produccionDiariaPanel = (kwPanel * HSP) / FACTOR_SEGURIDAD;
-
-            // 3. Cálculo de Paneles necesarios
-            let nPaneles = promedioDiarioKwh / produccionDiariaPanel;
-
-            // 4. Redondear al par superior más cercano
-            let redondeado = Math.ceil(nPaneles);
-            if (redondeado % 2 !== 0) {
-                redondeado++;
+    function calcularCostoCFE(kwhBimestre) {
+        let total = 0;
+        if (kwhBimestre > 500) {
+            total = kwhBimestre * TARIFA_CFE.dac;
+        } else {
+            if (kwhBimestre <= 150) {
+                total = kwhBimestre * TARIFA_CFE.basico;
+            } else if (kwhBimestre <= 280) {
+                total = (150 * TARIFA_CFE.basico) + ((kwhBimestre - 150) * TARIFA_CFE.intermedio);
+            } else {
+                total = (150 * TARIFA_CFE.basico) + (130 * TARIFA_CFE.intermedio) + ((kwhBimestre - 280) * TARIFA_CFE.excedente);
             }
-
-            // 5. Actualizar UI de Paneles
-            document.getElementById('panelCount').innerText = redondeado;
-
-            // 6. Sugerir Capacidad del Inversor
-            const potenciaTotalSistema = (redondeado * potenciaPanelW) / 1000; // en kW
-            let sugInversorText = "";
-
-            if (potenciaTotalSistema <= 3) sugInversorText = "Inversor de 3kW";
-            else if (potenciaTotalSistema <= 5) sugInversorText = "Inversor Growatt MIN 5000TL-X";
-            else if (potenciaTotalSistema <= 8) sugInversorText = "Inversor Growatt MIN 8000TL-X o Sol-Ark 8k";
-            else if (potenciaTotalSistema <= 12) sugInversorText = "Inversor Sol-Ark 12k Hybrid";
-            else sugInversorText = `Sistema Mayor (+${potenciaTotalSistema.toFixed(1)}kW) - Cotización Especial`;
-
-            document.getElementById('sugInversor').innerText = `Capacidad del Inversor: ${sugInversorText}`;
-
-        } else {
-            document.getElementById('panelCount').innerText = "0";
-            document.getElementById('sugInversor').innerText = "Ingresa tus consumos";
         }
+        return total * TARIFA_CFE.iva;
     }
 
-    // Mantener la función de idioma original
-    function changeLang(lang) {
-        const tagline = document.getElementById('tagline');
-        const tClient = document.getElementById('t-client');
-        const tUsage = document.getElementById('t-usage');
-        const optBi = document.getElementById('opt-bi');
-        const optMe = document.getElementById('opt-me');
-        const tCerts = document.getElementById('t-certs');
-        const cert1 = document.getElementById('cert1');
-        const cert2 = document.getElementById('cert2');
-        const tResult = document.getElementById('t-result');
-        const tPanels = document.getElementById('t-panels');
-        const lDept = document.getElementById('l-dept');
-        const btnWa = document.getElementById('btn-wa');
+    function recalcularTodo() {
+        let totalKwhAnual = 0;
+        let costoCfeAnual = 0;
+        const inputs = document.querySelectorAll('.in-kwh');
+        
+        inputs.forEach(i => {
+            let val = Number(i.value);
+            totalKwhAnual += val;
+            costoCfeAnual += calcularCostoCFE(val);
+        });
 
-        // Botones de idioma
-        document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        if (totalKwhAnual <= 0) return;
 
-        if (lang === 'en') {
-            tagline.innerText = 'High-Efficiency Solar Energy';
-            tClient.innerText = 'Client Information';
-            tUsage.innerText = 'Usage (kWh)';
-            optBi.innerText = 'Residential (Bimonthly)';
-            optMe.innerText = 'Commercial (Monthly)';
-            tCerts.innerText = 'Certifications & Quality';
-            cert1.innerText = 'Photovoltaic Systems Installation (PFVI).';
-            cert2.innerText = 'Installation Supervision (IPV).';
-            tResult.innerText = 'SUGGESTED SYSTEM:';
-            tPanels.innerText = 'PANELS';
-            lDept.innerText = 'Send to department:';
-            btnWa.innerText = 'REQUEST QUOTATION';
-            
-            // Placeholders
-            document.getElementById('nombre').placeholder = 'Full name';
-            document.getElementById('telefono').placeholder = 'WhatsApp number';
-            document.getElementById('direccion').placeholder = 'Location';
-        } else {
-            tagline.innerText = 'Energía Solar de Alta Eficiencia';
-            tClient.innerText = 'Información del Cliente';
-            tUsage.innerText = 'Consumo (kWh)';
-            optBi.innerText = 'Residencial (Bimestral)';
-            optMe.innerText = 'Comercial (Mensual)';
-            tCerts.innerText = 'Certificaciones y Calidad';
-            cert1.innerText = 'Instalación de Sistemas Fotovoltaicos (PFVI).';
-            cert2.innerText = 'Supervisión de Instalaciones (IPV).';
-            tResult.innerText = 'SISTEMA SUGERIDO:';
-            tPanels.innerText = 'PANELES';
-            lDept.innerText = 'Enviar a departamento:';
-            btnWa.innerText = 'SOLICITAR COTIZACIÓN';
+        const promDiario = totalKwhAnual / 365;
+        const wattsPanel = document.getElementById('potenciaPanel').value;
+        const kwPanel = wattsPanel / 1000;
+        
+        // Cálculo de paneles
+        let nPaneles = promDiario / (kwPanel * HSP * EFICIENCIA);
+        let redondeado = Math.ceil(nPaneles);
+        if (redondeado % 2 !== 0) redondeado++; // Siempre pares
 
-            // Placeholders
-            document.getElementById('nombre').placeholder = 'Nombre completo';
-            document.getElementById('telefono').placeholder = 'WhatsApp';
-            document.getElementById('direccion').placeholder = 'Ubicación';
-        }
+        // Producción
+        const produccionDia = redondeado * kwPanel * HSP * EFICIENCIA;
+        const produccionMes = produccionDia * 30;
+
+        // ROI y Ahorro
+        const costoSistemaEst = (redondeado * wattsPanel) * 1.15; // Estimado $1.15 USD/Watt
+        const ahorroAnualEst = costoCfeAnual * 0.95; // Ahorro del 95% del recibo
+        const roi = (costoSistemaEst * 20) / ahorroAnualEst; // Conversión simple a años (TC 20)
+
+        // UI
+        document.getElementById('panelCount').innerText = redondeado;
+        document.getElementById('prodDia').innerText = produccionDia.toFixed(1);
+        document.getElementById('prodMes').innerText = produccionMes.toFixed(0);
+        document.getElementById('roiVal').innerText = roi.toFixed(1);
+        document.getElementById('ahorroVal').innerText = "$" + Math.floor(ahorroAnualEst).toLocaleString();
+
+        // Inversor
+        const potTotal = (redondeado * wattsPanel) / 1000;
+        let inv = "";
+        if(potTotal <= 4) inv = "Growatt MIN 3000TL-X";
+        else if(potTotal <= 6) inv = "Growatt MIN 5000TL-X";
+        else if(potTotal <= 10) inv = "Sol-Ark 8k Hybrid";
+        else inv = "Sol-Ark 12k / 15k Hybrid";
+        document.getElementById('invSugerido').innerText = "Inversor Sugerido: " + inv;
     }
 
-    function enviarWA() {
+    function enviarWhatsApp() {
         const nombre = document.getElementById('nombre').value;
-        const tel = document.getElementById('telefono').value;
-        const loc = document.getElementById('direccion').value;
-        const panels = document.getElementById('panelCount').innerText;
-        const invSug = document.getElementById('sugInversor').innerText; // Agregado el inversor sugerido
-        const num = document.getElementById('waNumber').value;
-
-        if(!nombre || panels === "0") {
-            alert("Por favor ingrese sus datos y consumo.");
-            return;
-        }
-
-        const msg = encodeURIComponent(
-            `*COTIZACIÓN SOLAR - DIMA ELECTRICA - BAJA PRO-SERVICES*\n` +
-            `Cliente: ${nombre}\n` +
-            `WhatsApp: ${tel}\n` +
-            `Ubicación: ${loc}\n` +
-            `Sugerencia: ${panels} Paneles\n` +
-            `${invSug}` // Agregado al mensaje de WA
-        );
-        window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+        const paneles = document.getElementById('panelCount').innerText;
+        const ahorro = document.getElementById('ahorroVal').innerText;
+        const msg = encodeURIComponent(`*SOLICITUD COTIZACIÓN - BAJA PRO-SERVICES*\nCliente: ${nombre}\nSistema: ${paneles} Paneles\nAhorro Estimado: ${ahorro}/año\nSugerencia técnica procesada con éxito.`);
+        window.open(`https://wa.me/5216122198325?text=${msg}`);
     }
-
-    // Vincular todos los inputs al cálculo, incluyendo los nuevos
-    document.querySelectorAll('input, select').forEach(input => {
-        input.addEventListener('input', recalcularTotal);
-    });
-
-    // Iniciar el cálculo al cargar
-    recalcularTotal();
 </script>
 </body>
 </html>
