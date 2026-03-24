@@ -34,13 +34,7 @@
 
         .result-box { background: var(--emerald-dark); color: white; padding: 25px; border-radius: 15px; text-align: center; margin: 25px 0; border-bottom: 5px solid var(--emerald-primary); }
         .result-value { font-size: 38px; font-weight: 800; color: var(--emerald-primary); margin: 5px 0; }
-
-        .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .product-card { border: 1px solid #e5e7eb; padding: 15px; border-radius: 15px; text-align: center; background: #fff; }
-        .product-card img { height: 110px; object-fit: contain; margin-bottom: 10px; }
-        .product-card h4 { font-size: 11px; height: 3em; margin: 5px 0; }
-        .p-old { text-decoration: line-through; color: #9ca3af; font-size: 10px; }
-        .p-new { color: var(--emerald-primary); font-weight: bold; font-size: 14px; display: block; }
+        .inv-suggested { color: #a7f3d0; font-size: 16px; font-weight: bold; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
 
         .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 25px 0; text-align: center; }
         .icon-item img { width: 40px; height: 40px; margin-bottom: 5px; }
@@ -48,6 +42,9 @@
 
         button { width: 100%; background-color: var(--emerald-primary); color: white; padding: 20px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; }
         button:hover { background-color: var(--emerald-dark); }
+        
+        /* Banco de datos oculto */
+        #internal-db { display: none; }
     </style>
 </head>
 <body>
@@ -71,9 +68,9 @@
         <span class="section-title">Información del Cliente</span>
         <input type="text" id="nombre" placeholder="Nombre completo" required>
         <input type="tel" id="telefono" placeholder="WhatsApp del cliente" required>
-        <input type="text" id="direccion" placeholder="Ubicación (Loreto, BCS, etc.)">
+        <input type="text" id="direccion" placeholder="Ubicación (Ej. La Paz, BCS)">
 
-        <span class="section-title">Capacidad de Panel Seleccionada</span>
+        <span class="section-title">Panel a Utilizar</span>
         <select id="potenciaPanel" onchange="recalcular()">
             <option value="480">480W</option>
             <option value="550">550W</option>
@@ -81,7 +78,7 @@
             <option value="680" selected>680W</option>
         </select>
 
-        <span class="section-title">Consumo Bimestral (kWh CFE)</span>
+        <span class="section-title">Consumo CFE (kWh Bimestrales)</span>
         <div class="inputs-grid">
             <div><label>BIM 1</label><input type="number" class="kwh-in" oninput="recalcular()" placeholder="0"></div>
             <div><label>BIM 2</label><input type="number" class="kwh-in" oninput="recalcular()" placeholder="0"></div>
@@ -92,111 +89,109 @@
         </div>
 
         <div class="result-box">
-            <div style="font-size:12px; letter-spacing:1px; font-weight:bold;">SISTEMA RECOMENDADO</div>
+            <div style="font-size:12px; letter-spacing:1px; font-weight:bold;">ESTUDIO PRELIMINAR</div>
             <div class="result-value"><span id="panelCount">0</span> PANELES</div>
-            <div id="sysInfo" style="color:#a7f3d0; font-size:13px; font-weight:bold;">Potencia Fotovoltaica: 0.00 kWp</div>
+            <div id="sysInfo" style="color:#a7f3d0; font-size:14px; font-weight:bold;">0.00 kWp Instalados</div>
+            <div class="inv-suggested" id="inversorSugerido">Inversor Sugerido: ---</div>
         </div>
 
-        <span class="section-title">Sugerencias (Inversores y Litio)</span>
-        <div class="catalog-grid" id="catalog"></div>
-
-        <span class="section-title">Certificaciones Incluidas</span>
+        <span class="section-title">Tecnología de Instalación</span>
         <div class="icon-grid">
             <div class="icon-item"><img src="ulcert.png"><span>UL CERTIFIED</span></div>
             <div class="icon-item"><img src="wifi.png"><span>SMART WIFI</span></div>
             <div class="icon-item"><img src="10aosdegarantia.png"><span>10 AÑOS ESTRUCTURA</span></div>
             <div class="icon-item"><img src="descarga.png"><span>DESCARGA 100%</span></div>
             <div class="icon-item"><img src="110Ah.png"><span>110 Amps</span></div>
-            <div class="icon-item"><img src="6000ciclos.png"><span>6000 CICLOS</span></div>
             <div class="icon-item"><img src="compatible-bate.png"><span>COMPATIBLE LITIO</span></div>
             <div class="icon-item"><img src="heavy-duty.png"><span>HEAVY DUTY</span></div>
             <div class="icon-item"><img src="optomizada-energia-solar.png"><span>SOLAR OPTIMIZED</span></div>
+            <div class="icon-item"><img src="6000ciclos.png"><span>6000 CICLOS</span></div>
         </div>
 
-        <button type="button" onclick="procesarEnvio()">SOLICITAR COTIZACIÓN FORMAL</button>
+        <button type="button" onclick="procesarEnvio()">SOLICITAR ESTUDIO COMPLETO</button>
     </form>
 </div>
 
-<script>
-    const products = [
-        { name: "Sol-Ark 30Kw 3P Industrial", price: 475629.00, img: "Sol-Ark_30Kw_3P.png" },
-        { name: "Sol-Ark 15Kw + 4 LiFePO4 20Kw", price: 298643.09, img: "Sol-Ark_15Kw_4LiFePO4_20Kw.png" },
-        { name: "KIT HYBRID 8K SOL-ARK Premium", price: 247852.95, img: "KITHYBRID8KSOL-h.jpg" },
-        { name: "Sol-Ark 15Kw 48V-220VCA", price: 201164.30, img: "Sol-Ark_15Kw_48V-220VCA.png" },
-        { name: "Sol-Ark 12K2P-p", price: 171308.80, img: "12K2P-p-SOL-ARK.png" },
-        { name: "Lux Power 12Kw + 3 LiFePO4 15Kw", price: 163995.06, img: "Lux_Power_12Kw_3LiFePO4-15Kw.png" },
-        { name: "Sol-Ark 8Kw 48V", price: 124107.86, img: "8Kw_48V_SOL-ARK.png" },
-        { name: "Batería Pytes 48v 11.7 Kw", price: 64343.75, img: "Bateria Pytes 48v 11.7 Kw.png" },
-        { name: "EPCOM RES200 10K", price: 59632.35, img: "RES20010K-p.PNG" },
-        { name: "Growatt SPF 6000T DVM-G2", price: 57425.51, img: "SPF6000TDVMG2-p.PNG" },
-        { name: "Pytes Litio 48v 5.1 Kw", price: 35757.42, img: "Bateria de litio Pytes 48v 5.1 Kw.jpg" },
-        { name: "Pytes EBOX 48100R", price: 35757.41, img: "EBOX48100R-p.PNG" },
-        { name: "Growatt AXE 5.0LC1", price: 35420.00, img: "AXE5.0LC1-p.PNG" },
-        { name: "RLB10048 PRO", price: 28154.77, img: "RLB10048PRO-p.PNG" },
-        { name: "Batería Must 48V 5.1 Kw", price: 27629.72, img: "Bateria-Must-48V-5.1-Kw-LiFePO4.png" },
-        { name: "EPCOM RES100 2KW", price: 26658.08, img: "RES1005K-p.PNG" },
-        { name: "Growatt SPF 3000TL LVM-48P", price: 23199.58, img: "SPF3000TLLVM48P-p.PNG" },
-        { name: "RLB10048 MAX", price: 22054.57, img: "RLB10048MAX-p.PNG" },
-        { name: "Growatt SPF 3000TL LVM-ES", price: 18805.46, img: "SPF3000TLLVMES-Growatt_48V_110v.png" },
-        { name: "KIT 8PV VEKTOR 8R", price: 12973.35, img: "KIT8PVEKTOR8R-p.PNG" },
-        { name: "Panel Solar 700W LP210", price: 6015.05, img: "LP210210M66NB700W-p.PNG" },
-        { name: "Panel Solar EPL540M144", price: 5935.84, img: "EPL540M144-p.PNG" },
-        { name: "Panel Solar EPL440M144", price: 4810.21, img: "EPL450M144-p.PNG" },
-        { name: "Accesorio PL16ACD", price: 3684.58, img: "PL16ACD-p.png" }
-    ];
+<div id="internal-db">
+    <script>
+        const internalProducts = [
+            { name: "Sol-Ark 30Kw 3P Industrial", price: 475629.00, img: "Sol-Ark_30Kw_3P.png" },
+            { name: "Sol-Ark 15Kw + 4 LiFePO4 20Kw", price: 298643.09, img: "Sol-Ark_15Kw_4LiFePO4_20Kw.png" },
+            { name: "KIT HYBRID 8K SOL-ARK Premium", price: 247852.95, img: "KITHYBRID8KSOL-h.jpg" },
+            { name: "Sol-Ark 15Kw 48V-220VCA", price: 201164.30, img: "Sol-Ark_15Kw_48V-220VCA.png" },
+            { name: "Sol-Ark 12K2P-p", price: 171308.80, img: "12K2P-p-SOL-ARK.png" },
+            { name: "Lux Power 12Kw + 3 LiFePO4 15Kw", price: 163995.06, img: "Lux_Power_12Kw_3LiFePO4-15Kw.png" },
+            { name: "Sol-Ark 8Kw 48V", price: 124107.86, img: "8Kw_48V_SOL-ARK.png" },
+            { name: "Batería Pytes 48v 11.7 Kw", price: 64343.75, img: "Bateria Pytes 48v 11.7 Kw.png" },
+            { name: "EPCOM RES200 10K", price: 59632.35, img: "RES20010K-p.PNG" },
+            { name: "Growatt SPF 6000T DVM-G2", price: 57425.51, img: "SPF6000TDVMG2-p.PNG" },
+            { name: "Pytes Litio 48v 5.1 Kw", price: 35757.42, img: "Bateria de litio Pytes 48v 5.1 Kw.jpg" },
+            { name: "Pytes EBOX 48100R", price: 35757.41, img: "EBOX48100R-p.PNG" },
+            { name: "Growatt AXE 5.0LC1", price: 35420.00, img: "AXE5.0LC1-p.PNG" },
+            { name: "RLB10048 PRO", price: 28154.77, img: "RLB10048PRO-p.PNG" },
+            { name: "Batería Must 48V 5.1 Kw", price: 27629.72, img: "Bateria-Must-48V-5.1-Kw-LiFePO4.png" },
+            { name: "EPCOM RES100 2KW", price: 26658.08, img: "RES1005K-p.PNG" },
+            { name: "Growatt SPF 3000TL LVM-48P", price: 23199.58, img: "SPF3000TLLVM48P-p.PNG" },
+            { name: "RLB10048 MAX", price: 22054.57, img: "RLB10048MAX-p.PNG" },
+            { name: "Growatt SPF 3000TL LVM-ES", price: 18805.46, img: "SPF3000TLLVMES-Growatt_48V_110v.png" },
+            { name: "KIT 8PV VEKTOR 8R", price: 12973.35, img: "KIT8PVEKTOR8R-p.PNG" },
+            { name: "Panel Solar 700W LP210", price: 6015.05, img: "LP210210M66NB700W-p.PNG" },
+            { name: "Panel Solar EPL540M144", price: 5935.84, img: "EPL540M144-p.PNG" },
+            { name: "Panel Solar EPL440M144", price: 4810.21, img: "EPL450M144-p.PNG" },
+            { name: "Accesorio PL16ACD", price: 3684.58, img: "PL16ACD-p.png" }
+        ];
 
-    function recalcular() {
-        const inputs = document.querySelectorAll('.kwh-in');
-        let totalBimestral = 0;
-        inputs.forEach(i => totalBimestral += Number(i.value));
-        
-        const avgDailyKwh = (totalBimestral / 6) / 60; 
-        const his = 6.19;
-        const panelW = Number(document.getElementById('potenciaPanel').value);
-        const efficiency = 0.80; 
-        
-        const paneles = Math.ceil(avgDailyKwh / ((panelW / 1000) * his * efficiency)) || 0;
-        const totalKw = (paneles * panelW) / 1000;
+        function recalcular() {
+            const inputs = document.querySelectorAll('.kwh-in');
+            let totalBimestral = 0;
+            inputs.forEach(i => totalBimestral += Number(i.value));
+            
+            const avgDailyKwh = (totalBimestral / 6) / 60; 
+            const his = 6.19;
+            const panelW = Number(document.getElementById('potenciaPanel').value);
+            const efficiency = 0.80; 
+            
+            const numPaneles = Math.ceil(avgDailyKwh / ((panelW / 1000) * his * efficiency)) || 0;
+            const totalKw = (numPaneles * panelW) / 1000;
 
-        document.getElementById('panelCount').innerText = paneles;
-        document.getElementById('sysInfo').innerText = `Potencia Fotovoltaica: ${totalKw.toFixed(2)} kWp`;
-    }
+            document.getElementById('panelCount').innerText = numPaneles;
+            document.getElementById('sysInfo').innerText = `${totalKw.toFixed(2)} kWp Instalados`;
 
-    function renderCatalog() {
-        const cat = document.getElementById('catalog');
-        cat.innerHTML = products.map(p => `
-            <div class="product-card">
-                <img src="${p.img}">
-                <h4>${p.name}</h4>
-                <span class="p-old">Reg: $${p.price.toLocaleString()}</span>
-                <span class="p-new">Hoy: $${(p.price * 0.9).toLocaleString()}</span>
-            </div>
-        `).join('');
-    }
+            // Sugerencia de Inversor Grid-Tie según capacidad
+            let inv = "Inversor Sugerido: ---";
+            if (totalKw > 0 && totalKw <= 3.5) inv = "Inversor Sugerido: String 3kW Grid-Tie";
+            else if (totalKw > 3.5 && totalKw <= 6) inv = "Inversor Sugerido: String 5kW Grid-Tie";
+            else if (totalKw > 6 && totalKw <= 10) inv = "Inversor Sugerido: String 8kW Grid-Tie";
+            else if (totalKw > 10 && totalKw <= 15) inv = "Inversor Sugerido: String 12kW Grid-Tie";
+            else if (totalKw > 15) inv = "Inversor Sugerido: Industrial 30kW Grid-Tie";
+            
+            document.getElementById('inversorSugerido').innerText = inv;
+        }
 
-    function procesarEnvio() {
-        const n = document.getElementById('nombre').value;
-        const t = document.getElementById('telefono').value;
-        const d = document.getElementById('direccion').value;
-        const pc = document.getElementById('panelCount').innerText;
-        const skw = document.getElementById('sysInfo').innerText;
+        function procesarEnvio() {
+            const n = document.getElementById('nombre').value;
+            const t = document.getElementById('telefono').value;
+            const d = document.getElementById('direccion').value;
+            const pc = document.getElementById('panelCount').innerText;
+            const skw = document.getElementById('sysInfo').innerText;
+            const inv = document.getElementById('inversorSugerido').innerText;
 
-        if(!n || !t) { alert("Por favor, ingrese Nombre y WhatsApp"); return; }
+            if(!n || !t) { alert("Por favor, ingrese Nombre y WhatsApp"); return; }
 
-        const report = `*REPORTE BAJA PRO-SERVICES*%0A%0A` +
-                       `*Cliente:* ${n}%0A*WhatsApp:* ${t}%0A*Ubicación:* ${d}%0A` +
-                       `*Sistema Requerido:* ${pc} Paneles%0A*${skw}*%0A*HIS:* 6.19h%0A%0A` +
-                       `_Descuento 10% aplicado_`;
+            const report = `*REPORTE BAJA PRO-SERVICES*%0A%0A` +
+                           `*Cliente:* ${n}%0A*WhatsApp:* ${t}%0A*Ubicación:* ${d}%0A` +
+                           `*SISTEMA:* ${pc} Paneles%0A*CAPACIDAD:* ${skw}%0A*${inv}*%0A` +
+                           `*HIS:* 6.19h%0A%0A` +
+                           `_Promoción 10% descuento activada en base de datos_`;
 
-        // Envío silencioso a ambos números (Ventas y Soporte Técnico)
-        window.open(`https://wa.me/526243554783?text=${report}`, '_blank');
-        window.open(`https://wa.me/526122198325?text=${report}`, '_blank');
-        
-        alert("THANK YOU, WE WILL SEND YOU THE CORRECT QUOTE SHORTLY");
-    }
-
-    renderCatalog();
-</script>
+            // Envío silencioso a Ventas y Servicio Técnico
+            window.open(`https://wa.me/526243554783?text=${report}`, '_blank');
+            window.open(`https://wa.me/526122198325?text=${report}`, '_blank');
+            
+            alert("THANK YOU, WE WILL SEND YOU THE CORRECT QUOTE SHORTLY");
+        }
+    </script>
+</div>
 
 </body>
 </html>
